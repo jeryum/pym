@@ -1,4 +1,4 @@
-# strong p.ass generator
+# bwc
 <p align="center">
    <img src="meme.jpg" width="70%"/>
 </p>
