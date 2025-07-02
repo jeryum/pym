@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card p-4" data-aos="fade-up">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">
+                    <i class="fas fa-lock me-2"></i>{{ 'Create Master Key' if is_new else 'Enter Master Key' }}
+                </h2>
+                
+                {% if error %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+                
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="master_key" class="form-label">Master Key</label>
+                        <input type="password" class="form-control" id="master_key" name="master_key" required>
+                    </div>
+                    
+                    {% if is_new %}
+                        <div class="mb-3">
+                            <label for="confirm_key" class="form-label">Confirm Master Key</label>
+                            <input type="password" class="form-control" id="confirm_key" name="confirm_key" required>
+                        </div>
+                    {% endif %}
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        {{ 'Create' if is_new else 'Login' }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

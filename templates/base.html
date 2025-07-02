@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurePass - {% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #f8f9fa;
+            --bg-lighter: #ffffff;
+            --bg-dark: #e9ecef;
+            --accent: #bb86fc;
+            --accent-secondary: #03dac6;
+            --text-primary: #212529;
+            --text-secondary: #495057;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: var(--bg-lighter) !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .card {
+            background-color: var(--bg-lighter);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .btn-primary:hover {
+            background-color: #9a67ea;
+            border-color: #9a67ea;
+        }
+        
+        .btn-outline-primary {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .form-control, .form-select {
+            background-color: var(--bg-lighter);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--text-primary);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            background-color: var(--bg-lighter);
+            color: var(--text-primary);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 0.25rem rgba(187, 134, 252, 0.25);
+        }
+        
+        .table {
+            color: var(--text-primary);
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        
+        .credential-badge {
+            background-color: rgba(187, 134, 252, 0.2);
+            color: var(--accent);
+        }
+        
+        .password-display {
+            font-family: monospace;
+            letter-spacing: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                margin-bottom: 1.5rem;
+            }
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('dashboard') }}">
+                <i class="fas fa-lock me-2"></i>SecurePass
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="passwordsDropdown" role="button" data-bs-toggle="dropdown">
+                            Passwords
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('view_passwords', category='social media') }}">Social Media</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('view_passwords', category='email') }}">Email</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('view_passwords', category='other') }}">Other</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('celebrate') }}">Celebrations</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" data-aos="fade-down">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

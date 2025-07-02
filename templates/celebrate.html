@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Celebration Page Generator{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col">
+        <h1><i class="fas fa-birthday-cake me-2"></i>Celebration Page Generator</h1>
+        <p class="text-muted">Create a personalized celebration page for birthdays or other events</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card" data-aos="fade-up">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label for="age" class="form-label">Age</label>
+                            <input type="number" class="form-control" id="age" name="age" min="1" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="birthday" class="form-label">Birthday</label>
+                            <input type="date" class="form-control" id="birthday" name="birthday" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="theme" class="form-label">Theme</label>
+                        <select class="form-select" id="theme" name="theme">
+                            <option value="balloons">Balloons</option>
+                            <option value="confetti">Confetti</option>
+                            <option value="stars">Stars</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-magic me-2"></i>Generate Celebration Page
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fas fa-info-circle me-2"></i>About</h5>
+                <p class="card-text">
+                    Create a beautiful, animated celebration page that you can share with friends and family.
+                </p>
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb me-2"></i>After generation, you'll get a unique link to your celebration page.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
