@@ -37,4 +37,3 @@ http://localhost:5000
 - Create a master password on first run
 - Store passwords in encrypted format
 - Generate celebration pages for special events
-```
